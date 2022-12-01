@@ -39,4 +39,3 @@ def second_star(puzzle: list) -> int:
 
 
 second_star(day1puzzle)
-print(second_star(day1puzzle))
