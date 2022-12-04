@@ -10,7 +10,6 @@ def day2data(filename: str) -> list:
 
 
 day2puzzle = day2data('day2input.txt')
-print(day2puzzle)
 
 
 def first_star(puzzle: list) -> list:
@@ -32,5 +31,31 @@ def first_star(puzzle: list) -> list:
     return total_score
 
 
-print(first_star(day2puzzle))
+first_star(day2puzzle)
+
+
+day2puzzle = day2data('day2input.txt')
+
+
+def second_star(puzzle: list) -> int:
+    round_score = {'X': 0, 'Y': 3, 'Z': 6}
+    move_score = {'A': 1, 'B': 2, 'C': 3}
+    move_order = {'A': 'B', 'B': 'C', 'C': 'A'}
+    total_score = 0
+    for n in range(len(puzzle)):
+        if n % 2 == 1:
+            round_result = round_score[puzzle[n]]
+            if round_result == 6:
+                chosen_move = move_order[puzzle[n-1]]
+            elif round_result == 3:
+                chosen_move = puzzle[n-1]
+            elif round_result == 0:
+                chosen_move = move_order[move_order[puzzle[n-1]]]
+            total_score += move_score[chosen_move] + round_result
+    return total_score
+
+
+second_star(day2puzzle)
+print(second_star(day2puzzle))
+
 
