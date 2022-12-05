@@ -45,4 +45,4 @@ def second_star(puzzle: list) -> int:
     return total_sum
 
 
-print(second_star(day3puzzle))
+second_star(day3puzzle)
