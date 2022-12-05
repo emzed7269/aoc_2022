@@ -6,7 +6,6 @@ def day3data(filename: str) -> list:
 
 
 day3puzzle = day3data("day3input.txt")
-print(day3puzzle)
 
 
 def first_star(puzzle: list) -> int:
@@ -33,7 +32,6 @@ first_star(day3puzzle)
 def second_star(puzzle: list) -> int:
     priority = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     priority_list = [n for n in priority]
-    duplicates = []
     total_sum = 0
     for n in range(len(puzzle)):
         if n % 3 == 0:
