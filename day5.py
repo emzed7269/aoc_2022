@@ -26,28 +26,45 @@ def list_split(puzzle: list) -> list:
         row = directions[n].replace('move ', '')
         directions[n] = re.split(" from | to ", row)
     crates_build.pop(len(crates_build)-1)
-    return crates_build, directions
+    horizontal_display = list(map(list, zip(*crates_build)))
+    usable_display = [[x for x in sublist if x != '    ' and x != '   '] for sublist in horizontal_display]
+    return usable_display, directions
 
 
 crates, guidelines = list_split(day5puzzle)
 
 
 def first_star(puzzle: list, movements: list) -> str:
-    horizontal_display = list(map(list, zip(*puzzle)))
-    usable_display = [[x for x in sublist if x != '    ' and x != '   '] for sublist in horizontal_display]
     top_crates_str = ''
     for n in movements:
         n_of_crates = int(n[0])
         initial_stack = int(n[1]) - 1
         destination = int(n[2]) - 1
         while n_of_crates > 0:
-            usable_display[destination].insert(0, usable_display[initial_stack][0])
-            usable_display[initial_stack].pop(0)
+            puzzle[destination].insert(0, puzzle[initial_stack][0])
+            puzzle[initial_stack].pop(0)
             n_of_crates -= 1
-    for t in range(len(usable_display)):
-        top_crates_str += usable_display[t][0][1]
+    for t in range(len(puzzle)):
+        top_crates_str += puzzle[t][0][1]
     return top_crates_str
 
 
 first_star(crates, guidelines)
 
+
+def second_star(puzzle: list, movements: list) -> str:
+    top_crates_str = ''
+    for n in movements:
+        n_of_crates = int(n[0]) - 1
+        initial_stack = int(n[1]) - 1
+        destination = int(n[2]) - 1
+        while n_of_crates >= 0:
+            puzzle[destination].insert(0, puzzle[initial_stack][n_of_crates])
+            puzzle[initial_stack].pop(n_of_crates)
+            n_of_crates -= 1
+    for t in range(len(puzzle)):
+        top_crates_str += puzzle[t][0][1]
+    return top_crates_str
+
+
+second_star(crates, guidelines)
