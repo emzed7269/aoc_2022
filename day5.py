@@ -49,5 +49,5 @@ def first_star(puzzle: list, movements: list) -> str:
     return top_crates_str
 
 
-fs = first_star(crates, guidelines)
-print(fs)
+first_star(crates, guidelines)
+
